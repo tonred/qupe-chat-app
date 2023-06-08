@@ -9,12 +9,13 @@ import { Helmet } from 'react-helmet'
 import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 import { AppRouterApi } from '@/components/common/AppRouterApi'
 import { getPopupContainer, preventDefault } from '@/utils/dom-helper'
-import { Loadable } from '@/components/common/Loadable'
+// import { Loadable } from '@/components/common/Loadable'
 import { RootContextProvider } from '@/context/RootContext'
 import { PortalHost } from '@/components/common/Portal'
 import { UserContextProvider } from '@/context/UserContext'
+import MainRoute from '@/routes/Main'
 
-const MainRoute = Loadable(() => import('./routes/Main'))
+// const MainRoute = Loadable(() => import('./routes/Main'))
 
 const AppProvider: React.FC<PropsWithChildren> = React.memo(props => (
     <Suspense fallback={<LoadingSpinner />}>
