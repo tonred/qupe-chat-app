@@ -34,7 +34,7 @@ const Input = React.memo(() => {
 
     const handleSendMsg = useCallback(() => {
         (async () => {
-            if (!wallet.account || !root || !userState.profile) return
+            if (!wallet.account || !root || !userState.profile || !chatRoom) return
             setLoading(true)
             try {
                 await userState.profile.sendMessage(

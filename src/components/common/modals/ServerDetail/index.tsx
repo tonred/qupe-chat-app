@@ -48,7 +48,7 @@ export const ServerDetail: React.FC<SettingsViewProps> = React.memo(props => {
                         content: <h1>Work in progress</h1>,
                         title: 'Balances',
                         type: 'item',
-                    }
+                    },
                 ]),
                 title: 'Common',
                 type: 'group',
