@@ -7,6 +7,14 @@ import remarkBreaks from 'remark-breaks'
 // eslint-disable-next-line react/function-component-definition
 const ImageComponent: React.FC = (node, _inline, _className, _children, ..._props) => {
     const { src, alt } = node
+    if (
+        src.startsWith('data:image/jpeg;base64,')
+        || src.startsWith('data:image/gif;base64,')
+        || src.startsWith('data:image/png;base64,')) {
+        return (
+            <img src={src} alt={alt} />
+        )
+    }
     return (
         <a
             className="underline" href={src} target="_blank"
