@@ -21,7 +21,6 @@ const ChatServerContext = React.createContext<ChatServerContextProps>({
 ChatServerContext.displayName = 'ChatServerContext'
 
 export const ChatServerContextProvider: React.FC<PropsWithChildren<{ serverId: number }>> = React.memo(props => {
-    console.log('ChatServerContextProvider', props.serverId)
     const value = useServer(props.serverId)
 
     return (

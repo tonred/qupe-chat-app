@@ -29,8 +29,7 @@ export function error(message?: any, ...optionalParams: any[]): void {
 }
 
 export function debug(message?: any, ...optionalParams: any[]): void {
-    // console.log(process.env.NODE_ENV)
-    // if (process.env.NODE_ENV !== 'production') {
-    log(message, ...optionalParams)
-    // }
+    if (process.env.NODE_ENV !== 'production') {
+        log(message, ...optionalParams)
+    }
 }

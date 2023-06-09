@@ -2,6 +2,7 @@ import { Address } from 'everscale-inpage-provider'
 
 import EverLogo from '@/assets/icons/EVER.svg'
 import { type NetworkConfiguration } from '@/types'
+import { EVER_TOKENS } from '@/misc/tokenlist'
 
 export const ROOT_ADDRESS = new Address(
     '0:4b434c9cb8583540fbfde8ca6e7b5a9518939000702a9a36a125dc4360529371',
@@ -18,6 +19,7 @@ export const EverscaleConfig = {
     nativeCoinLogoURI: EverLogo,
     nativeCoinSymbol: 'EVER',
     networkId: 42,
+    tokenList: EVER_TOKENS,
 } as NetworkConfiguration
 
 export const LocalConfig = {
@@ -41,6 +43,7 @@ export const LocalConfig = {
     nativeCoinSymbol: 'EVER',
     // networkId: 42,
     networkId: 0,
+    tokenList: EVER_TOKENS,
 } as NetworkConfiguration
 
 export const DefaultNetworkConfig = LocalConfig

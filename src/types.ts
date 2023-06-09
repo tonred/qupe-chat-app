@@ -1,4 +1,5 @@
 import { type ConnectionProperties } from 'everscale-standalone-client/client/ConnectionController'
+import { type Address } from 'everscale-inpage-provider'
 
 export type NetworkConfiguration = {
     attachedValues: Map<string, number>
@@ -11,4 +12,11 @@ export type NetworkConfiguration = {
     explorer: {
         account: string
     }
+    tokenList: Token[]
+}
+
+export interface Token {
+    address: Address,
+    name: string,
+    decimals: number
 }

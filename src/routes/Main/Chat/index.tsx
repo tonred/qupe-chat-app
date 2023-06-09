@@ -18,7 +18,6 @@ const MainChat = React.memo(() => {
         serverId: string
         roomId: string
     }>()
-    console.log('serverId, roomId=', serverId, roomId)
     const { userState, update } = useUserContext()
     const [isJoined, setIsJoined] = useState(false)
     const [joinServerLoading, setJoinServerLoading] = useState(false)

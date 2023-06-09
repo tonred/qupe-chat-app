@@ -37,7 +37,7 @@ export const RoomPermissions: React.FC<RoomPermissionsProps> = React.memo<RoomPe
     >(undefined)
 
     const disabled = useMemo(() => {
-        if (!userState.profile) return false
+        if (!userState.profile) return true
         return !PermissionsManager.isAdmin({
             entity: chatRoom,
             profile: userState.profile,

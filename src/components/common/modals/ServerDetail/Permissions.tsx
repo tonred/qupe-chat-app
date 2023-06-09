@@ -37,7 +37,7 @@ export const ServerPermissions: React.FC<ServerPermissionsProps> = React.memo<Se
     >(undefined)
 
     const disabled = useMemo(() => {
-        if (!chatServer || !userState.profile) return false
+        if (!chatServer || !userState.profile) return true
         return !PermissionsManager.isAdmin({
             entity: chatServer,
             profile: userState.profile,

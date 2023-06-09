@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import _isString from 'lodash/isString'
-import { Input, Space } from 'antd'
+import { Input, InputNumber, Space } from 'antd'
 import _isNil from 'lodash/isNil'
 import { CheckCircleOutlined, CloseCircleOutlined, EditOutlined } from '@ant-design/icons'
 import clsx from 'clsx'
@@ -119,6 +119,22 @@ export const DefaultFullModalInputEditorRender: FullModalFieldEditorRenderCompon
     value,
     onChange,
 }) => <Input value={value} onChange={e => onChange(e.target.value)} />
+
+// eslint-disable-next-line react/function-component-definition
+export const DefaultFullModalInputNumberEditorRender: FullModalFieldEditorRenderComponent = ({
+    value,
+    onChange,
+}) => (
+    <InputNumber<string>
+        className="w-full"
+        value={value}
+        min="0"
+        max="9999999"
+        step="0.1"
+        onChange={v => onChange(v || '')}
+        stringMode
+    />
+)
 
 // eslint-disable-next-line react/function-component-definition
 export const DefaultFullModalTextAreaEditorRender: FullModalFieldEditorRenderComponent = ({

@@ -4,6 +4,8 @@ import React, {
 import _uniq from 'lodash/uniq'
 import { LoadingOutlined } from '@ant-design/icons'
 import { PermissionsManager } from 'qupe-lib/dist/permissionsManager'
+import { type PaymentInfo } from 'qupe-lib/dist/types'
+import BigNumber from 'bignumber.js'
 
 import { isEnterHotkey } from '@/utils/hot-key'
 import { useRpc } from '@/hooks'
@@ -11,7 +13,8 @@ import { useWallet } from '@/stores/WalletService'
 import { useRootContext } from '@/context/RootContext'
 import { useUserContext } from '@/context/UserContext'
 import { useChatRoomContext } from '@/context/ChatRoomContext'
-import { debug } from '@/utils'
+import { debug, formattedAmount } from '@/utils'
+import { useToken } from '@/hooks/useToken'
 
 import './index.less'
 
@@ -27,9 +30,37 @@ const Input = React.memo(() => {
     const { root } = useRootContext()
     const { userState } = useUserContext()
     const { chatRoom } = useChatRoomContext()
+    const [errorMessage, setErrorMessage] = useState('')
+    const messagePayment = useMemo((): PaymentInfo | undefined => {
+        const _messagePayment = chatRoom?.info()?.messagePayment
+        if (!_messagePayment || _messagePayment.amount === '0') return undefined
+        return _messagePayment
+    }, [chatRoom])
+    const messagePriceEl = useMemo(() => {
+        if (!messagePayment) return null
+        const token = useToken(messagePayment.token)
+        return (
+            <div className="select-none opacity-75">
+                {formattedAmount(messagePayment.amount, token?.decimals)}
+                {' '}
+                {token?.name}
+            </div>
+        )
+    }, [chatRoom])
     const canSendMessage = useMemo(() => {
         if (!chatRoom || !userState.profile) return false
-        return PermissionsManager.canSendMessage({ entity: chatRoom, profile: userState.profile })
+        if (!PermissionsManager.canSendMessage({ entity: chatRoom, profile: userState.profile })) {
+            setErrorMessage('You don\'t have permission to send message in this room')
+            return false
+        }
+        if (messagePayment) {
+            const balance = userState.profile.balances.get(messagePayment.token.toString())
+            if (!balance || new BigNumber(balance).lt(messagePayment.amount)) {
+                setErrorMessage('You don\'t have enough tokens on your balance')
+                return false
+            }
+        }
+        return true
     }, [chatRoom, userState.profile])
 
     const handleSendMsg = useCallback(() => {
@@ -43,6 +74,11 @@ const Input = React.memo(() => {
                     chatRoom,
                     message,
                     wallet.account!.publicKey,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    messagePayment,
                 )
                 setMessage('')
             }
@@ -93,7 +129,7 @@ const Input = React.memo(() => {
                     <ChatInputBoxInput
                         placeholder={
                             !canSendMessage
-                                ? 'You do not have permission to send message in this room'
+                                ? errorMessage
                                 : undefined
                         }
                         autoFocus
@@ -110,6 +146,7 @@ const Input = React.memo(() => {
                 </div>
                 <div className="px-2 flex space-x-1">
                     {loading && <LoadingOutlined className="text-xl" />}
+                    {messagePriceEl}
                     {/* todo */}
                     {/* <div>actions</div> */}
                     {/* {pluginChatInputButtons.map((item, i) => */}

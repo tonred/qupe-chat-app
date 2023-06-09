@@ -103,7 +103,6 @@ export const useRoom = (
                     setSubscription(s)
                     r.getMessages(35).then(tx => {
                         setHasMoreMessages(!!tx.continuation)
-                        console.log(tx.continuation)
                         setLastTx(tx.continuation)
                         setMessages(parseMessages(r.storedMessages, r.pendingMessages))
                         setLoading(false)
