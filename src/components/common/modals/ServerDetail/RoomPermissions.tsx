@@ -1,4 +1,6 @@
-import React, { useCallback, useMemo, useState } from 'react'
+import React, {
+    useCallback, useEffect, useMemo, useState,
+} from 'react'
 import { type ChatRoom } from 'qupe-lib/dist/chat/room'
 import { Address } from 'everscale-inpage-provider'
 import { PermissionsManager } from 'qupe-lib/dist/permissionsManager'
@@ -45,6 +47,9 @@ export const RoomPermissions: React.FC<RoomPermissionsProps> = React.memo<RoomPe
     const [changedPermissions, setChangedPermissions] = useState(
         new UserPermissions([...defaultPermissions.values]),
     )
+    useEffect(() => {
+        setChangedPermissions(new UserPermissions([...defaultPermissions.values]))
+    }, [defaultPermissions])
     const onSave = useMemo(
         () => () => {
             props.update().then(() => setLoading(false))
