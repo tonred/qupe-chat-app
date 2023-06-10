@@ -22,7 +22,7 @@
         "mobx": "^6.9.0",
         "mobx-react-lite": "^3.4.3",
         "p-min-delay": "^4.0.2",
-        "qupe-lib": "git://github.com/tonred/qupe-lib#217110742cf2c581c023d0a041bbb4cfaa4a3b0d",
+        "qupe-lib": "git://github.com/tonred/qupe-lib#a3800a701ee9dd615114caa4eed2ad89f854bda1",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-helmet": "^6.1.0",

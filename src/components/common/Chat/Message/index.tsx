@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Divider, Dropdown, Popover } from 'antd'
 import clsx from 'clsx'
 import _isEmpty from 'lodash/isEmpty'
-import { LoadingOutlined, MoreOutlined } from '@ant-design/icons'
+import { LoadingOutlined } from '@ant-design/icons'
 
 import { type ChatMessage } from '@/components/common/Chat/types'
 import { stopPropagation } from '@/utils/dom-helper'
@@ -44,9 +44,10 @@ import { MessageRender } from '@/components/common/Chat/Message/render'
 
 // eslint-disable-next-line react/function-component-definition
 const MessageActionIcon: React.FC = () => (
-    <div className="text-xl px-0.5 w-6 h-6 flex justify-center items-center opacity-60 hover:opacity-100">
-        <MoreOutlined rotate={90} />
-    </div>
+    null
+    // <div className="text-xl px-0.5 w-6 h-6 flex justify-center items-center opacity-60 hover:opacity-100">
+    //     <MoreOutlined rotate={90} />
+    // </div>
 )
 
 /**

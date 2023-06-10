@@ -35,7 +35,7 @@ export const ModalCreateGroup: React.FC = React.memo(() => {
         }
     }, [])
     const handleCreate = useCallback(() => {
-        if (!root || !wallet.account?.address || !userState.profile) return
+        if (!root || !wallet.account?.address || !userState.profile || !userState.profile.isDeployed) return
         setLoading(true)
         root.deployServer(
             // @ts-ignore
