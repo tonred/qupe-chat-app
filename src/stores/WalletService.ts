@@ -4,7 +4,7 @@ import {
 } from 'mobx'
 import {
     Address,
-    hasEverscaleProvider,
+    // hasEverscaleProvider,
     type AssetType,
     type ContractState,
     type FullContractState,
@@ -70,16 +70,16 @@ const staticRpc = useStaticRpc()
 const rpc = useRpc()
 
 export async function connect(): Promise<Permissions['accountInteraction'] | undefined> {
-    const hasProvider = await hasEverscaleProvider()
-
-    if (hasProvider) {
-        await rpc.ensureInitialized()
-        return (
-            await rpc.requestPermissions({
-                permissions: ['basic', 'accountInteraction'],
-            })
-        ).accountInteraction
-    }
+    // const hasProvider = await hasEverscaleProvider()
+    //
+    // if (hasProvider) {
+    await rpc.ensureInitialized()
+    return (
+        await rpc.requestPermissions({
+            permissions: ['basic', 'accountInteraction'],
+        })
+    ).accountInteraction
+    // }
     return undefined
 }
 
@@ -159,14 +159,15 @@ export class WalletService extends BaseStore<WalletData, WalletState> {
 
         this.setState('isConnecting', true)
 
-        try {
-            const hasProvider = await hasEverscaleProvider()
-            this.setState('hasProvider', hasProvider)
-        }
-        catch (e) {
-            this.setState('hasProvider', false)
-            return
-        }
+        // try {
+        //     const hasProvider = await hasEverscaleProvider()
+        //     console.log(hasProvider)
+        //     this.setState('hasProvider', hasProvider)
+        // }
+        // catch (e) {
+        //     this.setState('hasProvider', false)
+        //     return
+        // }
 
         if (!this.hasProvider) {
             return
@@ -387,20 +388,20 @@ export class WalletService extends BaseStore<WalletData, WalletState> {
             return
         }
 
-        let hasProvider = false
+        const hasProvider = true
 
-        try {
-            hasProvider = await hasEverscaleProvider()
-        }
-        catch (e) {}
-
-        if (!hasProvider) {
-            this.setState({
-                hasProvider: false,
-                isInitializing: false,
-            })
-            return
-        }
+        // try {
+        //     hasProvider = await hasEverscaleProvider()
+        // }
+        // catch (e) {}
+        //
+        // if (!hasProvider) {
+        //     this.setState({
+        //         hasProvider: false,
+        //         isInitializing: false,
+        //     })
+        //     return
+        // }
 
         this.setState({
             hasProvider,

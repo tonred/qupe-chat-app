@@ -2,10 +2,10 @@ import { Address } from 'everscale-inpage-provider'
 
 import EverLogo from '@/assets/icons/EVER.svg'
 import { type NetworkConfiguration } from '@/types'
-import { EVER_TOKENS } from '@/misc/tokenlist'
+import { EVER_TOKENS, VENOM_DEVNET_TOKENS } from '@/misc/tokenlist'
 
 export const ROOT_ADDRESS = new Address(
-    '0:4b434c9cb8583540fbfde8ca6e7b5a9518939000702a9a36a125dc4360529371',
+    '0:027ca4dd4e6c77107f3e5a9d36108514d2fb0011b4bef3f44fdb1f96d55e3788',
 )
 
 export const EverscaleConfig = {
@@ -20,6 +20,26 @@ export const EverscaleConfig = {
     nativeCoinSymbol: 'EVER',
     networkId: 42,
     tokenList: EVER_TOKENS,
+} as NetworkConfiguration
+
+export const DevnetVenomConfig = {
+    attachedValues: {},
+    connectionProperties: {
+        data: {
+            endpoint: 'https://jrpc-devnet.venom.foundation/rpc',
+        },
+        group: 'dev',
+        id: 1000,
+        type: 'jrpc',
+    },
+    explorer: {
+        account: 'https://devnet.venomscan.com/{{ADDR}}',
+    },
+    name: 'Venom Devnet',
+    nativeCoinDecimals: 9,
+    nativeCoinSymbol: 'VENOM',
+    networkId: 1002,
+    tokenList: VENOM_DEVNET_TOKENS,
 } as NetworkConfiguration
 
 export const LocalConfig = {
@@ -46,4 +66,4 @@ export const LocalConfig = {
     tokenList: EVER_TOKENS,
 } as NetworkConfiguration
 
-export const DefaultNetworkConfig = LocalConfig
+export const DefaultNetworkConfig = DevnetVenomConfig
