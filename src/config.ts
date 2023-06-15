@@ -33,7 +33,7 @@ export const DevnetVenomConfig = {
         type: 'jrpc',
     },
     explorer: {
-        account: 'https://devnet.venomscan.com/{{ADDR}}',
+        account: 'https://devnet.venomscan.com/accounts/{{ADDR}}',
     },
     name: 'Venom Devnet',
     nativeCoinDecimals: 9,
