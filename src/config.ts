@@ -5,7 +5,7 @@ import { type NetworkConfiguration } from '@/types'
 import { EVER_TOKENS, VENOM_DEVNET_TOKENS } from '@/misc/tokenlist'
 
 export const ROOT_ADDRESS = new Address(
-    '0:027ca4dd4e6c77107f3e5a9d36108514d2fb0011b4bef3f44fdb1f96d55e3788',
+    '0:b181589895e3325c33d7dbb453c59617e113c7b1e0ccdba18f3e5f3ee670b4a5',
 )
 
 export const EverscaleConfig = {
@@ -42,6 +42,26 @@ export const DevnetVenomConfig = {
     tokenList: VENOM_DEVNET_TOKENS,
 } as NetworkConfiguration
 
+export const BroxusTestnetConfig = {
+    attachedValues: {},
+    connectionProperties: {
+        data: {
+            endpoint: 'https://jrpc-broxustestnet.everwallet.net/rpc',
+        },
+        group: 'dev',
+        id: 1337,
+        type: 'jrpc',
+    },
+    explorer: {
+        account: 'https://broxustestnet.everscan.io/accounts/{{ADDR}}',
+    },
+    name: 'Broxus Testnet',
+    nativeCoinDecimals: 9,
+    nativeCoinSymbol: 'EVEER',
+    networkId: 1337,
+    tokenList: VENOM_DEVNET_TOKENS,
+} as NetworkConfiguration
+
 export const LocalConfig = {
     attachedValues: {},
     connectionProperties: {
@@ -66,4 +86,4 @@ export const LocalConfig = {
     tokenList: EVER_TOKENS,
 } as NetworkConfiguration
 
-export const DefaultNetworkConfig = DevnetVenomConfig
+export const DefaultNetworkConfig = BroxusTestnetConfig
