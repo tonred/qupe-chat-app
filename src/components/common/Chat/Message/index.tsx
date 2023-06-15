@@ -50,9 +50,6 @@ const MessageActionIcon: React.FC = () => (
     // </div>
 )
 
-/**
- * 普通消息
- */
 const NormalMessage: React.FC<ChatMessageItemProps> = React.memo(props => {
     const { showAvatar, payload } = props
     const userAddress = payload.author.owner?.toString() || payload.author.address.toString()
@@ -106,7 +103,6 @@ const NormalMessage: React.FC<ChatMessageItemProps> = React.memo(props => {
                     </Popover>
                 ) : (
                     <div className="flex flex-row">
-                        {payload.isPending && <LoadingOutlined className="p-1" />}
                         <div className="hidden group-hover:block opacity-40">
                             {formatShortTimeUnix(payload.createdAt || 0)}
                         </div>
@@ -114,7 +110,6 @@ const NormalMessage: React.FC<ChatMessageItemProps> = React.memo(props => {
                 )}
             </div>
 
-            {/* 主体 */}
             <div
                 className="flex flex-col flex-1 overflow-auto group"
                 onContextMenu={stopPropagation}
@@ -152,14 +147,12 @@ const NormalMessage: React.FC<ChatMessageItemProps> = React.memo(props => {
                         {/* <span>{getMessageRender(payload.content)}</span> */}
                         {/* <span>{payload.content}</span> */}
 
-                        {/* <span><ReactMarkdown># Hello, *world*!</ReactMarkdown></span> */}
 
                     </div>
                 </AutoFolder>
 
             </div>
-
-            {/* 操作 */}
+            {payload.isPending && <LoadingOutlined className="p-1" />}
             <div
                 className={clsx(
                     'bg-white dark:bg-black rounded absolute right-2 cursor-pointer -top-3 shadow-sm flex',
